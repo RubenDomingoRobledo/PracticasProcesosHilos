@@ -1,0 +1,13 @@
+Identifique la sección critica, los problemas de concurrencia, comente el código adjunto,
+ modifíquelo para que imprima por consola la información relevante de cada problema
+ tal y como se muestra en los ejemplos de ejecución.
+ 
+ 
+ 
+ #Problema: Cena de los filósofos#
+ 
+ 
+ 
+ 
+ 
+ #Problema: El puente#
