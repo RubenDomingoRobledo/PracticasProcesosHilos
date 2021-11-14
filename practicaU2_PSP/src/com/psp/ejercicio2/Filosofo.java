@@ -26,7 +26,7 @@ public class Filosofo implements Runnable {
 		  while (true) {
                
                 synchronized (leftFork) {
-
+                	
                 	synchronized (rightFork) {
                     }
                 }

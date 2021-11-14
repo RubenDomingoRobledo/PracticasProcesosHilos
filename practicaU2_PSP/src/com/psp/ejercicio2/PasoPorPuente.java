@@ -3,6 +3,8 @@ package com.psp.ejercicio2;
 
 import java.util.Random;
 
+//Creamos clase puente y definimos variables como el peso maximo, y el maximo numero de persona en el puente
+//e inicializamos variables 
 class Puente {  
 
   private static final int PESO_MAXIMO = 200;
@@ -10,6 +12,7 @@ class Puente {
   private int peso = 0;
   private int numPersonas = 0;
 
+  //Creamos métodos getter y añadimos la palabra clave synchronized en su declaracion
   synchronized public int getPeso() {
     return peso;
   }
@@ -18,7 +21,8 @@ class Puente {
     return numPersonas;
   }
 
-
+//Creamos metodo para comprobar que el peso de la personas sea menor que el peso maximo que puede soportar el puente
+//y para que no se sobrepase el numero maximo de personas
   synchronized public boolean autorizacionPaso(Persona persona) {
 
     boolean result;
@@ -33,12 +37,14 @@ class Puente {
     return result;
   }
 
+  //Metodo para restar el peso de la persona al pseo maximo que uede soportar el puente
   synchronized public void terminaPaso(Persona persona) {
     this.peso -= persona.getPeso();
     this.numPersonas--;
   }
 }
 
+//Creamos clase persona con sus correspondientes atributos, metodos, y constructor implementando la interfaz Runnable
 class Persona implements Runnable {
   private final Puente puente;
 
@@ -58,11 +64,10 @@ class Persona implements Runnable {
     this.idPersona = idP;
   }
 
+  //Creamos metodo abstracto para comprobar si la persona puede acceder al puente o tiene que esperar
   @Override
   public void run() {
-
-   
-
+	  
     boolean autorizado = false;
     while (!autorizado) {
       synchronized (this.puente) {
@@ -74,10 +79,12 @@ class Persona implements Runnable {
           }
         }
       }
+      
+      
     }
-
-   
-
+    
+    //Generamos un numero aleatorio para ver el tiempo que tarda una persona en cruzar el puente
+    // y hacemos que los demás hilos se mantengan dormidos durante ese tiempo
     Random r = new Random();
     int tiempoPaso = this.tMinPaso + r.nextInt(this.tMaxPaso - this.tMinPaso + 1);
     try {
@@ -87,7 +94,9 @@ class Persona implements Runnable {
     } catch (InterruptedException ex) {
     	
     }
-
+    
+    //Una vez que una persona haya terminado de cruzar el puente notifica a todos los demás hilos 
+    //que ha terminado su ejecución
     synchronized (this.puente) {
       this.puente.terminaPaso(this);
 
@@ -96,12 +105,15 @@ class Persona implements Runnable {
   }
 }
 
+//Método main
 public class PasoPorPuente {
 
   public static void main(String[] args) {
-
+	
+	//Creamos objeto puente
     final Puente puente = new Puente();
 
+    //Definimos variables
     int tMinParaLlegadaPersona = 1;
     int tMaxParaLlegadaPersona = 30;
     int tMinPaso = 10;
@@ -114,13 +126,14 @@ public class PasoPorPuente {
     int idPersona = 1;
 
     while (true) {
+      int tPaso = tMinPaso + r.nextInt(
+    		  tMaxPaso - tMinPaso + 1);
 
       int tParaLlegadaPersona = tMinParaLlegadaPersona + r.nextInt(
               tMaxParaLlegadaPersona - tMinParaLlegadaPersona + 1);
      
       int pesoPersona = minPesoPersona + r.nextInt(
               maxPesoPersona - minPesoPersona + 1);
-
 
       try {
         Thread.sleep(1000*tParaLlegadaPersona);
@@ -130,7 +143,11 @@ public class PasoPorPuente {
 
       Thread hiloPersona = new Thread(new Persona(puente, pesoPersona, tMinPaso, tMaxPaso, "P"+idPersona));
       hiloPersona.start();
-
+      System.out.println("Siguiente persona llega en "+ tParaLlegadaPersona);
+      System.out.println("- P"+ idPersona+ " de "+ pesoPersona + " kg quiere cruzar, en puente "+ puente.getPeso() + " kg, "+ puente.getNumPersonas()+ " personas.");
+      System.out.println("> P"+ idPersona+ " con peso "+ pesoPersona + " puede cruzar, puente soporta peso " + (pesoPersona + puente.getPeso()) + ", con "+ (1 + puente.getNumPersonas()) + " personas.");
+      System.out.println("P" + idPersona + " va a tardar tiempo " + tPaso + " en cruzar.");
+      System.out.println("< P"+ idPersona+ " sale del puente, puente soporta peso " + (pesoPersona + puente.getPeso()) + ", con "+ (1 + puente.getNumPersonas()) + " personas.");
       idPersona++;
 
     }
