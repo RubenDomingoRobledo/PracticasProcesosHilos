@@ -2,14 +2,14 @@ package com.psp.ejercicio1;
 
 public class BarberoDurmiente {
 	public static void main (String args[]) {
-		int nBarberos=1, idCliente=1, nClientes=10, nSillas=5;
+		int nBarberos=5, idCliente=1, nClientes=50, nSillas=5;
 		
 		Barberia barberia = new Barberia(nBarberos, nSillas);
     	
 		System.out.println("Barberia Abierta.");
         
-		for (int i = 0; i < nBarberos; i++) {
-			Barbero barbero = new Barbero(barberia, 1);	
+		for (int i = 1; i < nBarberos; i++) {
+			Barbero barbero = new Barbero(barberia, i);	
 			Thread hiloBarbero = new Thread(barbero);
 			hiloBarbero.start();
 		}
