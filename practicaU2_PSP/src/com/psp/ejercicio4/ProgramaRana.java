@@ -22,7 +22,7 @@ class RanaComeMoscas implements Runnable{
 	
 	@Override
 	public void run() {
-		System.out.println("Rana empieza a cazar moscas " + LocalTime.now());
+		System.out.println("Rana empieza a cazar moscas " + LocalTime.now().withNano(0));
 		ses.scheduleAtFixedRate(new Runnable() {
 			public void run() {
 				moscas();
@@ -31,6 +31,6 @@ class RanaComeMoscas implements Runnable{
 	}
 	
 	private static void moscas() {
-			System.out.println("Rana come mosca " + LocalTime.now());
+			System.out.println("Rana come mosca " + LocalTime.now().withNano(0));
 	}
 }
