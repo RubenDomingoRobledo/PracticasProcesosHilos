@@ -72,9 +72,11 @@ class Persona implements Runnable {
     while (!autorizado) {
       synchronized (this.puente) {
         autorizado = this.puente.autorizacionPaso(this);
+      	System.out.println("> "+ idPersona+ " con peso "+ peso + " puede cruzar, puente soporta peso " + puente.getPeso() + ", con "+ puente.getNumPersonas() + " personas.");
         if (!autorizado) {
           try {
-            this.puente.wait();
+         	  System.out.println("# " + idPersona + " debe esperar.");
+        	  this.puente.wait();
           } catch (InterruptedException ex) {
           }
         }
@@ -99,7 +101,7 @@ class Persona implements Runnable {
     //que ha terminado su ejecución
     synchronized (this.puente) {
       this.puente.terminaPaso(this);
-      System.out.println("< " + idPersona+ " sale del puente, puente soporta peso " + puente.getPeso() + ", con "+ (1 + puente.getNumPersonas()) + " personas.");
+      System.out.println("< " + idPersona+ " sale del puente, puente soporta peso " + puente.getPeso() + ", con "+ puente.getNumPersonas() + " personas.");
       puente.notifyAll();
     }
   }
@@ -121,6 +123,7 @@ public class PasoPorPuente {
     int minPesoPersona = 40;
     int maxPesoPersona = 120;
 
+    //Creamos bucle para generar numeros aleatorios para simular la llegada de la siguiente persona al puente y peso de la persona
     System.out.println(">>>>>>>>>>>> Comienza simulación.");
     Random r = new Random();
     int idPersona = 1;
@@ -139,11 +142,11 @@ public class PasoPorPuente {
 
       }
 
+      //creamos los hilos simulando personas con un id que se va incrementando de 1 en 1 con un contador
       Thread hiloPersona = new Thread(new Persona(puente, pesoPersona, tMinPaso, tMaxPaso, "P"+idPersona));
       hiloPersona.start();
       System.out.println("Siguiente persona llega en "+ tParaLlegadaPersona);
       System.out.println("- P"+ idPersona+ " de "+ pesoPersona + " kg quiere cruzar, en puente "+ puente.getPeso() + " kg, "+ puente.getNumPersonas()+ " personas.");
-      System.out.println("> P"+ idPersona+ " con peso "+ pesoPersona + " puede cruzar, puente soporta peso " + (pesoPersona + puente.getPeso()) + ", con "+ (1 + puente.getNumPersonas()) + " personas.");
       idPersona++;
 
     }
