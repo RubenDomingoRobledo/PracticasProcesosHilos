@@ -2,13 +2,13 @@ package com.psp.ejercicio1;
 
 public class BarberoDurmiente {
 	public static void main (String args[]) {
-		int nBarberos=5, idCliente=1, nClientes=50, nSillas=5;
+		int nBarberos=2, idCliente=1, nClientes=20, nSillas=5;
 		
 		Barberia barberia = new Barberia(nBarberos, nSillas);
     	
 		System.out.println("Barberia Abierta.");
         
-		for (int i = 1; i < nBarberos; i++) {
+		for (int i = 1; i <= nBarberos; i++) {
 			Barbero barbero = new Barbero(barberia, i);	
 			Thread hiloBarbero = new Thread(barbero);
 			hiloBarbero.start();
@@ -23,6 +23,7 @@ public class BarberoDurmiente {
             try {
             	long tiempo = (long) (Math.random() * 1000);
             	Thread.sleep(tiempo);	
+            	hiloCliente.join();
             }
             catch(InterruptedException iex) {
                 System.out.println("Fallo al ejecutar");
