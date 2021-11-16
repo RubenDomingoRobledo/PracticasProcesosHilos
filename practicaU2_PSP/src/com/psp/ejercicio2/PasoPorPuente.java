@@ -88,10 +88,10 @@ class Persona implements Runnable {
     Random r = new Random();
     int tiempoPaso = this.tMinPaso + r.nextInt(this.tMaxPaso - this.tMinPaso + 1);
     try {
-    	
-      Thread.sleep(1000*tiempoPaso);
-      
-    } catch (InterruptedException ex) {
+    	System.out.println(idPersona + " va a tardar tiempo " + tiempoPaso + " en cruzar.");
+    	Thread.sleep(1000*tiempoPaso); 
+    } 
+    catch (InterruptedException ex) {
     	
     }
     
@@ -99,7 +99,7 @@ class Persona implements Runnable {
     //que ha terminado su ejecución
     synchronized (this.puente) {
       this.puente.terminaPaso(this);
-
+      System.out.println("< " + idPersona+ " sale del puente, puente soporta peso " + puente.getPeso() + ", con "+ (1 + puente.getNumPersonas()) + " personas.");
       puente.notifyAll();
     }
   }
@@ -126,8 +126,6 @@ public class PasoPorPuente {
     int idPersona = 1;
 
     while (true) {
-      int tPaso = tMinPaso + r.nextInt(
-    		  tMaxPaso - tMinPaso + 1);
 
       int tParaLlegadaPersona = tMinParaLlegadaPersona + r.nextInt(
               tMaxParaLlegadaPersona - tMinParaLlegadaPersona + 1);
@@ -146,8 +144,6 @@ public class PasoPorPuente {
       System.out.println("Siguiente persona llega en "+ tParaLlegadaPersona);
       System.out.println("- P"+ idPersona+ " de "+ pesoPersona + " kg quiere cruzar, en puente "+ puente.getPeso() + " kg, "+ puente.getNumPersonas()+ " personas.");
       System.out.println("> P"+ idPersona+ " con peso "+ pesoPersona + " puede cruzar, puente soporta peso " + (pesoPersona + puente.getPeso()) + ", con "+ (1 + puente.getNumPersonas()) + " personas.");
-      System.out.println("P" + idPersona + " va a tardar tiempo " + tPaso + " en cruzar.");
-      System.out.println("< P"+ idPersona+ " sale del puente, puente soporta peso " + (pesoPersona + puente.getPeso()) + ", con "+ (1 + puente.getNumPersonas()) + " personas.");
       idPersona++;
 
     }
