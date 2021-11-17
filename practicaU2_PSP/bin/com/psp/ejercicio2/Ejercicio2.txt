@@ -1,0 +1,23 @@
+Identifique la sección critica, los problemas de concurrencia, comente el código adjunto,
+ modifíquelo para que imprima por consola la información relevante de cada problema
+ tal y como se muestra en los ejemplos de ejecución.
+ 
+ 
+ 
+ #Problema: Cena de los filósofos#
+ 
+ La sección critica podría considerarse el tenedor ya que en realidad un filósofo representa a un proceso 
+ y un tenedor representa a un recurso compartido de uso exclusivo.
+ 
+ Algunos problemas de concurrencia que podrían surgir serian:
+ - Dos filosofos intentan acceder al mismo recurso al mismo tiempo (exclusión mutua)
+ - Dos filosofos se quedan en estado de espera hasta que coma el otro y deje los palillos (interbloqueo)
+ 
+ #Problema: El puente#
+  La sección critica podría considerarse el puente, en realidad una persona representa a un proceso 
+ y el  paso por el puente representa a un recurso compartido.
+ 
+ Algunos problemas de concurrencia que podrían surgir serian:
+ - Varias personas acceden al puente al mismo tiempo y sobrepasan el peso máximo del puente.
+ - Las personas se quedan en estado de espera hasta que uno inicie el paso por el puente.
+ - Se sobrepasa el numero máximo de personas en el puente.
