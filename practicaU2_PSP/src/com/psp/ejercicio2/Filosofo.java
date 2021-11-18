@@ -37,6 +37,7 @@ public class Filosofo implements Runnable {
                 		doAction(LocalTime.now().withNano(0) + " Deja el palillo derecho");
                     }
                 	doAction(LocalTime.now().withNano(0) + " Deja palillo izquierdo. Se pone a pensar");
+                	doAction(LocalTime.now().withNano(0) + " Pensando");
                 }
             }
         } catch (InterruptedException e) {

@@ -20,16 +20,27 @@ class RanaComeMoscas implements Runnable{
 		hilo.start();
 	}
 	
+	Runnable rn= new Runnable() {
+		@Override
+		public void run() {
+			moscas();
+		}
+	};
+	
+	Runnable rn2 = new Runnable() {
+		@Override
+		public void run() {
+			ses.shutdown();	
+		}
+	};
+	
 	@Override
 	public void run() {
 		System.out.println("Rana empieza a cazar moscas " + LocalTime.now().withNano(0));
-		ses.scheduleAtFixedRate(new Runnable() {
-			public void run() {
-				moscas();
-			}
-		}, 5, 3, TimeUnit.SECONDS);
+		ses.scheduleAtFixedRate(rn , 5, 3, TimeUnit.SECONDS);
+		ses.schedule(rn2, 30, TimeUnit.SECONDS);
 	}
-	
+
 	private static void moscas() {
 			System.out.println("Rana come mosca " + LocalTime.now().withNano(0));
 	}
