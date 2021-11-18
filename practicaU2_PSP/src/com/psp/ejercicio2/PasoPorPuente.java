@@ -72,7 +72,6 @@ class Persona implements Runnable {
     while (!autorizado) {
       synchronized (this.puente) {
         autorizado = this.puente.autorizacionPaso(this);
-      	System.out.println("> "+ idPersona+ " con peso "+ peso + " puede cruzar, puente soporta peso " + puente.getPeso() + ", con "+ puente.getNumPersonas() + " personas.");
         if (!autorizado) {
           try {
          	  System.out.println("# " + idPersona + " debe esperar.");
@@ -80,6 +79,7 @@ class Persona implements Runnable {
           } catch (InterruptedException ex) {
           }
         }
+        System.out.println("> "+ idPersona+ " con peso "+ peso + " puede cruzar, puente soporta peso " + puente.getPeso() + ", con "+ puente.getNumPersonas() + " personas.");
       }
       
       

@@ -1,7 +1,5 @@
 package com.psp.ejercicio2;
 
-import java.time.LocalTime;
-
 public class  CenaFilosofos {
 
 	 public static void main(String[] args) throws Exception {
