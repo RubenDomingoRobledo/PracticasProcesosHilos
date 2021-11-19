@@ -1,38 +1,18 @@
 package com.psp.ejercicio6;
 
-public class Cuenta implements Runnable{
-	private Thread hilo = null;
+public class Cuenta {
 	public int saldo = 0;
-
-	public Cuenta(String str) {
-		hilo= new Thread (this, str);
-		hilo.start();
-	}
-
-	@Override
-	public void run() {
-		System.out.println("Saldo de la cuenta: " + saldo);
-		for (int i = 0; i <= 3; i++) {
-			ingreso(1000);
-			System.out.println(hilo.getName() + " ingresa 1000 € en la cuenta");
-			
-			retirada(2000);
-			System.out.println(hilo.getName() + " saca 2000 € de la cuenta");
-			System.out.println("Saldo de la cuenta: " + saldo);
-		}
+	
+	public int getSaldo() {
+		return saldo;
 	}
 	
 	public void ingreso(int cantidad) {
 		saldo += cantidad;
+		System.out.println(Thread.currentThread().getName()+ " ha ingresado " + cantidad + " € en la cuenta");
 	}
 	
-	synchronized public boolean retirada(int cantidad) {
+	public void retiro(int cantidad) {
 		saldo -= cantidad;
-		if (saldo < 0) {
-			return false;
-		}
-		else {
-			return true;
-		}
 	}
 }

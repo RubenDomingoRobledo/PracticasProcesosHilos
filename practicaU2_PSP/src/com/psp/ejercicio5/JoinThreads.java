@@ -8,13 +8,8 @@ public class JoinThreads {
 		Thread h2 = new Thread(hilo2);
 		h1.start();
 		h2.start();
-		try {
-			h1.wait();
-			h2.notify();
-		} 
-		catch (InterruptedException ex) {
-			System.out.println("Hilo principal interrumpido.");
-		}
+		hilo1.setHilo(h2);
+		
 		System.out.println("Hilo principal terminado sin esperar a los hilos");
 	}
 }
