@@ -11,5 +11,8 @@ public class Transaccion {
 		cliente1.start();
 		cliente2.start();
 		cliente3.start();
+		
+		//Además del mecanismo utilizado (sinchronized), existen otros mecanismos para proporcionar la exclusión mutua 
+		//como pueden ser el uso de los métodos wait/notify, o implementar el uso del ScheduledExecutorService. 
 	}
 }
