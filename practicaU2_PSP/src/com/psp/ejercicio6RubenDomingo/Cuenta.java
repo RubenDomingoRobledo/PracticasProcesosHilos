@@ -7,12 +7,20 @@ public class Cuenta {
 		return saldo;
 	}
 	
-	public void ingreso(int cantidad) {
+	public void ingresoDinero(int cantidad) {
 		saldo += cantidad;
 		System.out.println(Thread.currentThread().getName()+ " ha ingresado " + cantidad + " € en la cuenta");
 	}
 	
-	public void retiro(int cantidad) {
-		saldo -= cantidad;
+	public synchronized void retiroDinero(int cantidad) {
+		if (getSaldo() >= cantidad) {
+			System.out.println("Saldo actual: " + getSaldo());
+			System.out.println("El usuario " + Thread.currentThread().getName() + " esta retirando " + cantidad + " € de la cuenta");
+			saldo -= cantidad;
+			System.out.println("El retiro se ha realizado correctamente. El nuevo saldo es de " + getSaldo()+ "€");
+		}
+		else {
+			System.out.println("No hay saldo suficiente para realizar la transacción porque la cuenta se quedaria en numeros rojos.");
+		}
 	}
 }

@@ -7,18 +7,14 @@ import java.util.concurrent.TimeUnit;
 
 public class ProgramaRana {
 	public static void main(String[] args) {
-		RanaComeMoscas hilo1 = new RanaComeMoscas("Rana");
+		RanaComeMoscas rana = new RanaComeMoscas();
+		Thread hilo1 = new Thread(rana, "Rana");
+		hilo1.start();
 	}
 }
 
 class RanaComeMoscas implements Runnable{
-	private Thread hilo = null;
 	ScheduledExecutorService ses = Executors.newSingleThreadScheduledExecutor();
-	
-	public RanaComeMoscas (String str) {
-		hilo= new Thread(this, str);
-		hilo.start();
-	}
 	
 	Runnable rn= new Runnable() {
 		@Override
@@ -36,7 +32,7 @@ class RanaComeMoscas implements Runnable{
 	
 	@Override
 	public void run() {
-		System.out.println("Rana empieza a cazar moscas " + LocalTime.now().withNano(0));
+		System.out.println(Thread.currentThread().getName() +" empieza a cazar moscas " + LocalTime.now().withNano(0));
 		ses.scheduleAtFixedRate(rn , 5, 3, TimeUnit.SECONDS);
 		ses.schedule(rn2, 30, TimeUnit.SECONDS);
 	}

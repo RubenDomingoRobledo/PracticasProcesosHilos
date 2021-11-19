@@ -36,7 +36,7 @@ class Barberia {
         
         synchronized (listaClientes) {									
             while(listaClientes.size()==0) {
-                System.out.println("Barbero"+idBarbero+" esta durmiendo... Esperando a que entre un cliente\n");
+                System.out.println("Barbero"+idBarbero+" esta durmiendo... Esperando a que entre un cliente");
                 try {
                 	listaClientes.wait();								
                 }

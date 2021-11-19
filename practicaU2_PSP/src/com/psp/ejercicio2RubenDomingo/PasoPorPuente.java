@@ -3,7 +3,7 @@ package com.psp.ejercicio2RubenDomingo;
 
 import java.util.Random;
 
-//Creamos clase puente y definimos variables como el peso maximo, y el maximo numero de persona en el puente
+//Creamos clase puente y definimos variables como el peso maximo, y el maximo numero de personas en el puente
 //e inicializamos variables 
 class Puente {  
 
@@ -64,7 +64,7 @@ class Persona implements Runnable {
     this.idPersona = idP;
   }
 
-  //Creamos metodo abstracto para comprobar si la persona puede acceder al puente o tiene que esperar
+  //Creamos metodo abstracto run implementado por la interfaz Runnable para comprobar si la persona puede acceder al puente o tiene que esperar
   @Override
   public void run() {
 	  

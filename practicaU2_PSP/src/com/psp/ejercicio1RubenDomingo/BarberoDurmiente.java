@@ -2,7 +2,8 @@ package com.psp.ejercicio1RubenDomingo;
 
 public class BarberoDurmiente {
 	public static void main (String args[]) {
-		int nBarberos=2, idCliente=1, nClientes=20, nSillas=5;
+		
+		int nBarberos=2, idCliente=1, nClientes=10, nSillas=5;
 		
 		Barberia barberia = new Barberia(nBarberos, nSillas);
     	
@@ -22,20 +23,17 @@ public class BarberoDurmiente {
             
             try {
             	long tiempo = (long) (Math.random() * 1000);
-            	Thread.sleep(tiempo);	
-            	hiloCliente.join();
+            	Thread.sleep(tiempo);
             }
             catch(InterruptedException iex) {
                 System.out.println("Fallo al ejecutar");
             }
         }
         
-        
-			System.out.println("La barberia ha cerrado");
-	        System.out.println("Clientes totales: "+nClientes);
-	        System.out.println("Total de clientes atendidos: "+barberia.getcortesPeloTotales());
-	        System.out.println("Total de clientes perdidos: "+barberia.getclientesPerdidos());
-
+		System.out.println("La barberia ha cerrado");
+	    System.out.println("Clientes totales: "+nClientes);
+	    System.out.println("Total de clientes atendidos: "+barberia.getcortesPeloTotales());
+	    System.out.println("Total de clientes perdidos: "+barberia.getclientesPerdidos());
 	}
 }
 

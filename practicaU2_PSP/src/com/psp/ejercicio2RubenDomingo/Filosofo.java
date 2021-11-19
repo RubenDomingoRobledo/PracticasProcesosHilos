@@ -14,6 +14,8 @@ public class Filosofo implements Runnable {
     }
 
     private void doAction(String action) throws InterruptedException {
+    	//Implementamos clase LocalTime y metodo now para obtener la hora actual,
+    	//y quitamos los milisegundos con withNano(0)
         System.out.println(Thread.currentThread().getName() + " " + LocalTime.now().withNano(0) + " " + action);
         //Cada filosofo espera un tiempo aleatorio entre 0 y 3000 ms
         Thread.sleep(((int) (Math.random() * 3000)));
@@ -22,8 +24,6 @@ public class Filosofo implements Runnable {
     @Override
     public void run() {
         try {
-        	//Implementamos clase LocalTime y metodo now para obtener la hora actual,
-        	//y quitamos los milisegundos con withNano(0)
         	//Todos los filosofos comienzan pensando
         	doAction("Pensando"); 
         	
